@@ -7,7 +7,7 @@ import {
   getUrl,
   runConsumer,
 } from "./utils/functions.js";
-import { ConsumerInfoMap, ENV } from "./utils/constants.js";
+import { ConsumerInfoMap } from "./utils/constants.js";
 
 const app = express();
 app.use(express.json());
