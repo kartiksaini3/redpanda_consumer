@@ -1,16 +1,18 @@
+import "dotenv/config";
+
 export const ENV = { PORT: +process.env.PORT || 4000 };
 
 export const ConsumerInfoMap = {
   "consumer-1": {
-    topic: "consumer-1_topic",
+    topic: "latest_block_number",
     groupId: "consumer-1_group",
   },
   "consumer-2": {
-    topic: "consumer-2_topic",
+    topic: "block_info",
     groupId: "consumer-2_group",
   },
   "consumer-3": {
-    topic: "consumer-3_topic",
+    topic: "current_block_number",
     groupId: "consumer-3_group",
   },
 };
