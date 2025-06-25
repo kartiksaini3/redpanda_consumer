@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { Kafka } from "kafkajs";
 import express from "express";
 import {
@@ -15,6 +16,9 @@ const kafka = new Kafka({
   clientId: "express-app",
   brokers: ["localhost:9092"],
 });
+
+// ENVs
+const port = +process.env.PORT || 4000;
 
 app.get("/consumer-1", async (req, res) => {
   const url = getUrl(req);
@@ -49,6 +53,6 @@ app.get("/consumer-3", async (req, res) => {
   res.json(commonConsumerReturnedJSON(topic));
 });
 
-app.listen(ENV.PORT, () => {
-  console.log(`Consumers running on port ${ENV.PORT}`);
+app.listen(port, () => {
+  console.log(`Consumers running on port ${port}`);
 });
