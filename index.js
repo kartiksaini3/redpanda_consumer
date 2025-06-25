@@ -6,10 +6,9 @@ import {
   getUrl,
   runConsumer,
 } from "./utils/functions.js";
-import { ConsumerInfoMap } from "./utils/constants.js";
+import { ConsumerInfoMap, ENV } from "./utils/constants.js";
 
 const app = express();
-const PORT = process.env.PORT || 4000;
 app.use(express.json());
 
 const kafka = new Kafka({
@@ -50,6 +49,6 @@ app.get("/consumer-3", async (req, res) => {
   res.json(commonConsumerReturnedJSON(topic));
 });
 
-app.listen(PORT, () => {
-  console.log(`Express API running on port ${PORT}`);
+app.listen(ENV.PORT, () => {
+  console.log(`Consumers running on port ${ENV.PORT}`);
 });

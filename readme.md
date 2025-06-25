@@ -1,4 +1,4 @@
-# Commands to run
+## Commands to run
 
-npm i
-npm start
+- npm i
+- npm run dev / npm run dev-clear

@@ -1,3 +1,5 @@
+export const ENV = { PORT: +process.env.PORT || 4000 };
+
 export const ConsumerInfoMap = {
   "consumer-1": {
     topic: "consumer-1_topic",
