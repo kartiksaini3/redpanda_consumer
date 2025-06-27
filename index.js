@@ -10,6 +10,7 @@ import {
 } from "./utils/functions.js";
 import { ConsumerInfoMap } from "./utils/constants.js";
 import { createTables } from "./db.js";
+import { addBlockInfo } from "./consumer-2/service.js";
 
 const app = express();
 app.use(express.json());
@@ -42,10 +43,10 @@ app.get("/consumer-2", async (req, res) => {
   const url = getUrl(req);
   const { topic } = ConsumerInfoMap[url];
 
-  await runConsumer(url, kafka, (val) => {
-    console.log("blockInfo", JSON.parse(val));
-
-    commonConsumerListenerCallback(topic, val);
+  await runConsumer(url, kafka, async (data) => {
+    data = JSON.parse(data);
+    await addBlockInfo(pool, data);
+    commonConsumerListenerCallback(topic, data);
   });
 
   res.json(commonConsumerReturnedJSON(topic));
