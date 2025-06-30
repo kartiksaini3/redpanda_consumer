@@ -1,7 +1,4 @@
 const createTablesQueries = `
--- to generate UUID
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
 CREATE TABLE IF NOT EXISTS blocks (
   height BIGINT PRIMARY KEY,
   hash TEXT UNIQUE NOT NULL,                   
@@ -11,13 +8,10 @@ CREATE TABLE IF NOT EXISTS blocks (
 );
 
 CREATE TABLE IF NOT EXISTS txs (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  height INTEGER,
-  hash TEXT,
-  contract_address TEXT,
-  time TIMESTAMPTZ,
+  height BIGINT PRIMARY KEY,
+  hash TEXT PRIMARY KEY,
   raw_tx TEXT,
-  parsed_tx TEXT
+  time TIMESTAMPTZ
 );
 `;
 

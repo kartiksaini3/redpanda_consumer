@@ -11,12 +11,8 @@ export const addBlockInfo = async (pool, data) => {
     blockHeaderData?.time,
   ];
   if (!blockData[3]) return await saveBlock(pool, blockData);
-  return (
-    await Promise.allSettled([
-      saveBlock(pool, blockData),
-      saveTxs(pool, blockData, blockResultdata?.block?.data?.txs),
-    ])
-  )
-    .filter(({ status }) => status === "fulfilled")
-    .map(({ value }) => value);
+  await Promise.all([
+    saveBlock(pool, blockData),
+    saveTxs(pool, blockData, blockResultdata?.block?.data?.txs),
+  ]);
 };
