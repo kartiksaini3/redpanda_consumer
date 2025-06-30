@@ -9,6 +9,16 @@ CREATE TABLE IF NOT EXISTS blocks (
   tx_count INT NOT NULL,
   timestamp TIMESTAMPTZ NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS txs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  height INTEGER,
+  hash TEXT,
+  contract_address TEXT,
+  time TIMESTAMPTZ,
+  raw_tx TEXT,
+  parsed_tx TEXT
+);
 `;
 
 export const createTables = async (pool) => {

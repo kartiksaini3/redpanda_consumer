@@ -1,4 +1,4 @@
-import { saveBlock } from "./repository.js";
+import { saveBlock, saveTxs } from "./repository.js";
 
 export const addBlockInfo = async (pool, data) => {
   const blockResultdata = data?.result;
@@ -10,5 +10,13 @@ export const addBlockInfo = async (pool, data) => {
     blockResultdata?.block?.data?.txs?.length,
     blockHeaderData?.time,
   ];
-  return await saveBlock(pool, blockData);
+  if (!blockData[3]) return await saveBlock(pool, blockData);
+  return (
+    await Promise.allSettled([
+      saveBlock(pool, blockData),
+      saveTxs(pool, blockData, blockResultdata?.block?.data?.txs),
+    ])
+  )
+    .filter(({ status }) => status === "fulfilled")
+    .map(({ value }) => value);
 };
