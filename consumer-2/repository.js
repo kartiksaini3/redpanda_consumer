@@ -11,7 +11,6 @@ export const saveBlock = async (pool, blockInfo) => {
 
 export const saveTxs = async (pool, blockData, txs) => {
   for (const tx of txs) {
-    console.log("txInfo", txs, parsedTx);
     const query = `
     INSERT INTO txs (hash, height, raw_tx, time)
     VALUES ($1, $2, $3, $4)
