@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS blocks (
 );
 
 CREATE TABLE IF NOT EXISTS txs (
-  height BIGINT PRIMARY KEY,
   hash TEXT PRIMARY KEY,
+  height BIGINT,
   raw_tx TEXT,
   time TIMESTAMPTZ
 );
